@@ -3,9 +3,11 @@ phpwallboxsniffer
 
 A simple PHP TCP listener for passive Modbus sniffing. 
 
-Usage : report System Current as is reported by an energy meter to your Wallbox. Used for troubleshooting PowerBoost behaviour.
+Usage : report data from a modbus energy meter, used by a Wallbox charger. 
 
-This setup may also be used to sniff Solar inverters / energy meters.
+Used for troubleshooting WallBox PowerBoost behaviour.
+
+This setup may also be used to sniff Solar inverters - Energy meter combinations
 
 
 Setup
@@ -74,21 +76,23 @@ Connecting the EW11
 
 From this point on every second the current measured should be available.
 
-References
+References and tools
 -----------
 - N1-CT manual :  https://ineprometering.com/wp-content/uploads/2022/01/N1-CT-Short-user-manual-V1.03.pdf
+- EMS installation manual : https://support.wallbox.com/wp-content/uploads/2022/12/EN_EMS_Installation_Guide_English.pdf
+- activating powerboost : https://support.wallbox.com/en/knowledge-base/how-to-activate-power-boost/
 - Modbus decoder helper : https://rapidscada.net/modbus/
-- https://www.scadacore.com/tools/programming-calculators/online-hex-converter/
+- Hex converter : https://www.scadacore.com/tools/programming-calculators/online-hex-converter/
 
 
 Notes
 -----
-- no checksum validation is performed, so do not rely on the values reported for automation
-- the initial handshake between Wallbox and N1-CT has not been investigated
-- the modbus traffic is based on PowerBoost only.
-- passively sniffing a modbus should not void any warranty.
-- for PowerBoost operation, it is not required that the mains voltage is connected to the N1-CT, hence it will not report any voltage or power data.
-
+- Wallbox, Pulsar and PowerBoost are registered names of Wallbox.com. This repo is not affiliated with or endorsed by Wallbox.
+- No modbus checksum validation is performed, so do not rely on the values reported for automation
+- The initial handshake between Wallbox and N1-CT has not been investigated
+- The modbus traffic is based on PowerBoost only.
+- Passively sniffing a modbus should not void any warranty.
+- For PowerBoost operation, it is not required that the mains voltage is connected to the N1-CT, hence it will not report any voltage or power data.
 
 Once steady, the buffer holds the following
 ```

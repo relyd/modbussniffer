@@ -93,6 +93,7 @@ Notes
 - The initial handshake between Wallbox and N1-CT has not been investigated
 - The modbus traffic is based on PowerBoost only.
 - Passively sniffing a modbus should not void any warranty.
+- In case of trouble check your modbus termination, depending on the distance between charger and meter.
 - Don't be tempted to add another master to the modbus and query the meter next to the charger. 
 - For PowerBoost operation, it is not required that the mains voltage is connected to the N1-CT, hence it will not report any voltage or power data.
 - For a more permanent solution, a dedicated ESP32 with Tasmota running modbusmonitor would be a much better option. See https://github.com/arendst/Tasmota/discussions/18618 

@@ -87,7 +87,7 @@ Notes
 - the initial handshake between Wallbox and N1-CT has not been investigated
 - the modbus traffic is based on PowerBoost only.
 - passively sniffing a modbus should not void any warranty.
-
+- for PowerBoost operation, it is not required that the mains voltage is connected to the N1-CT, hence it will not report any voltage or power data.
 
 
 Once steady, the buffer holds the following
@@ -102,7 +102,7 @@ Response 4 bytes : 3FA1 6873
 READ voltage (5000) length 02
 01 03 50 00 00 02 D5 0B 
 
-RESPONSE 3D8F 5C29 ?? = float 0.07 ??
+RESPONSE 3D8F 5C29 
 01 03 04 3D 8F 5C 29 3E AA 
 ========================
 READ total active energy (6000) length 02

@@ -94,6 +94,8 @@ Notes
 - Passively sniffing a modbus should not void any warranty.
 - Don't be tempted to add another master to the modbus and query the meter next to the charger. 
 - For PowerBoost operation, it is not required that the mains voltage is connected to the N1-CT, hence it will not report any voltage or power data.
+- For a more permanent solution, a dedicated ESP32 with Tasmota running modbusmonitor would be a much better option. See https://github.com/arendst/Tasmota/discussions/18618 
+- The best solution would be that wallbox would consider allowing pushing ALL known data to an Mqtt broker. 
 
 Once steady, the buffer holds the following
 ```

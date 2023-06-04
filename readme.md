@@ -63,16 +63,17 @@ Preparing the charger
 Preparing the EW11
 - Power the EW11. Do not use the 12v provided by your charger, this is untested because we have no specs on the max power it can deliver.
 - Set the Serial Port parameters to : 9600 8,n,1 , buffer 512, Flow control disable, Protocol settings NONE
-- Create a new "Communication profile" : TCP client, server = 192.168.1.40, port 99, route UART
+- Create a new "Communication profile" : TCP client, server = 192.168.1.40, port 99, route UART (in this case we presume the monitoring device that runs the sniffer has 192.168.1.40 as the IP address) 
 
 Starting the listener
-- check the IP address in the php code, change it to your local IP address
+- check the IP address in the php code, change it to your local IP address. 
 - run the PHP script
 
 Connecting the EW11 
 - power off both charger and EW11
 - Connect the EW11 serial lines (A,B) with the modbus lines D+,D-
 - Power on the EW11
+- Power on the charger
 
 From this point on every second the current measured should be available.
 
@@ -96,8 +97,11 @@ Notes
 - For PowerBoost operation, it is not required that the mains voltage is connected to the N1-CT, hence it will not report any voltage or power data.
 - For a more permanent solution, a dedicated ESP32 with Tasmota running modbusmonitor would be a much better option. See https://github.com/arendst/Tasmota/discussions/18618 
 - The best solution would be that wallbox would consider allowing pushing ALL known data to an Mqtt broker. 
+- if you want to contribute, please help testing the Tasmota variant
 
-Once steady, the buffer holds the following
+Additional information
+----------------------
+Once steady, the buffer holds the following:
 ```
 ====================
 READ Current at register 500A length 02 

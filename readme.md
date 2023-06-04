@@ -92,6 +92,7 @@ Notes
 - The initial handshake between Wallbox and N1-CT has not been investigated
 - The modbus traffic is based on PowerBoost only.
 - Passively sniffing a modbus should not void any warranty.
+- Don't be tempted to add another master to the modbus and query the meter next to the charger. 
 - For PowerBoost operation, it is not required that the mains voltage is connected to the N1-CT, hence it will not report any voltage or power data.
 
 Once steady, the buffer holds the following

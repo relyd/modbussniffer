@@ -20,16 +20,17 @@ You will need :
 - a device able to run PHP
 
 ```
+Connections (see image): 
 powermeter -> modbus -> charger 
-              modbus -> Elfin EW11 TCP client
-                        Elfin EW11 TCP client -> PC running PHP tcp listener ip 192.168.1.40 port 99
+modbus -> Elfin EW11
+Elfin EW11 -> WIFI AP -> PC running PHP tcp listener
 ```
 Background:
 --------------
 A typical home installation has a maximum contracted power, and the corresponding current.
 A charger may prioritise the regular use over charging, for this it needs to know this maximum.
 
-In this case, with a Wallbox Pulsar plus using PowerBoost, you set that maximum in your wallbox using a (tiny) rotary switch
+In this case, with a Wallbox Pulsar plus using PowerBoost, you set the maximum in your wallbox using a (tiny) rotary switch
 
 ```
 POSITION    0   1 2  3  4  5  6  7  8   9
@@ -37,7 +38,9 @@ MAX CURRENT *PS 6 10 13 16 20 25 32 *PS *PS
 ```
 E.g. the max contracted power is 5.7KW => 20 Amps => setting 5
 
-Using the PowerBoost function, we assume that whenever any home appliance uses power, the charger is throttled down. 
+Using the PowerBoost function, we assume that whenever home appliances use energy, the charger is throttled down or even switched off. 
+
+In that case it should show "Waiting for energy"
 
 In order to do that, a power meter is connected via modbus, and reported to the charger.
 
@@ -46,12 +49,12 @@ The charger polls the meter continuously, after an initial handshake.
 Problem:
 --------------
 Even when using Powerboost with correct settings, the main fuse may trip. 
-The charger "knows" the current that is being used in the whole system, and the current it charges with, 
-but Wallbox so far does not bother providing that detail in any interface. 
+The charger "knows" the current that is flowing in the whole system, and the current it charges with, 
+but Wallbox so far does not bother providing that detail in any interface.
 
-This makes debugging a pain.
+This makes debugging a pain. Furthermore the precise algorithm how powerboost responds is not clear from the documentation.
 
-To read out this value, you need to sniff the modbus traffic and decode the responses from the meter.
+To read out the total current, you need to sniff the modbus traffic and decode the responses from the meter.
 
 Installation
 --------------
@@ -90,10 +93,11 @@ Notes
 -----
 - Wallbox, Pulsar and PowerBoost are registered names of Wallbox.com. This repo is not affiliated with or endorsed by Wallbox.
 - No modbus checksum validation is performed, so do not rely on the values reported for automation
-- The initial handshake between Wallbox and N1-CT has not been investigated
-- The modbus traffic is based on PowerBoost only.
+- The initial handshake between Wallbox and N1-CT has not been investigated, it probably reads meter ID, sets comm parameters etc.
+- The modbus traffic analysed here is based on PowerBoost only.
+- Since the meter is powered by the 
 - Passively sniffing a modbus should not void any warranty.
-- In case of trouble check your modbus termination, depending on the distance between charger and meter.
+- In case of trouble check your modbus termination. It depends on the distance between charger and meter.
 - Don't be tempted to add another master to the modbus and query the meter next to the charger. 
 - For PowerBoost operation, it is not required that the mains voltage is connected to the N1-CT, hence it will not report any voltage or power data.
 - For a more permanent solution, a dedicated ESP32 with Tasmota running modbusmonitor would be a much better option. See https://github.com/arendst/Tasmota/discussions/18618 

@@ -1,4 +1,4 @@
-phpwallboxsniffer
+modbussniffer
 ==============
 
 A simple PHP TCP listener for passive Modbus sniffing. 

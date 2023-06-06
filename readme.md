@@ -95,7 +95,6 @@ Notes
 - No modbus checksum validation is performed, so do not rely on the values reported for automation
 - The initial handshake between Wallbox and N1-CT has not been investigated, it probably reads meter ID, sets comm parameters etc.
 - The modbus traffic analysed here is based on PowerBoost only.
-- Since the meter is powered by the 
 - Passively sniffing a modbus should not void any warranty.
 - In case of trouble check your modbus termination. It depends on the distance between charger and meter.
 - Don't be tempted to add another master to the modbus and query the meter next to the charger. 

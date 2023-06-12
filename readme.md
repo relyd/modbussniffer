@@ -9,6 +9,8 @@ Used for troubleshooting WallBox PowerBoost behaviour.
 
 This setup may also be used to sniff Solar inverters - Energy meter combinations
 
+(If you want it faster/easier, see the arduino/C++ script for an ESP8266 that pushes the Current value of the N1-CT that is reported to the wallbox to an MQTT broker)
+
 
 Setup
 --------------
@@ -25,6 +27,7 @@ powermeter -> modbus -> charger
 modbus -> Elfin EW11
 Elfin EW11 -> WIFI AP -> PC running PHP tcp listener
 ```
+
 Background:
 --------------
 A typical home installation has a maximum contracted power, and the corresponding current.
@@ -48,9 +51,9 @@ The charger polls the meter continuously, after an initial handshake.
 
 Problem:
 --------------
-Even when using Powerboost with correct settings, the main fuse may trip. 
+Even when using Powerboost with correct settings, the main fuse may trip for various reasons, like clamp misfit, cable losses etc. 
 The charger "knows" the current that is flowing in the whole system, and the current it charges with, 
-but Wallbox so far does not bother providing that detail in any interface.
+but Wallbox so far does not bother providing that detail in any interface, nor the web interface, nor the mobile app.
 
 This makes debugging a pain. Furthermore the precise algorithm how powerboost responds is not clear from the documentation.
 
@@ -91,6 +94,7 @@ References and tools
 
 Notes
 -----
+- Working on mains equipment is dangerous. Don't electrocute yourself. Know the rules.
 - Wallbox, Pulsar and PowerBoost are registered names of Wallbox.com. This repo is not affiliated with or endorsed by Wallbox.
 - No modbus checksum validation is performed, so do not rely on the values reported for automation
 - The initial handshake between Wallbox and N1-CT has not been investigated, it probably reads meter ID, sets comm parameters etc.
@@ -100,12 +104,13 @@ Notes
 - Don't be tempted to add another master to the modbus and query the meter next to the charger. 
 - For PowerBoost operation, it is not required that the mains voltage is connected to the N1-CT, hence it will not report any voltage or power data.
 - For a more permanent solution, a dedicated ESP32 with Tasmota running modbusmonitor would be a much better option. See https://github.com/arendst/Tasmota/discussions/18618 
-- The best solution would be that wallbox would consider allowing pushing ALL known data to an Mqtt broker. 
+- The best solution would be that Wallbox would push ALL known data to a user settable Mqtt broker. Thank you.
 - if you want to contribute, please help testing the Tasmota variant
+- See the ESP script for a simple ESP8266 modbus->mqtt bridge
 
 Additional information
 ----------------------
-Once steady, the buffer holds the following:
+Once steady, the following data can be observed:
 ```
 ====================
 READ Current at register 500A length 02 

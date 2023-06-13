@@ -35,8 +35,12 @@ const char* mqtt_topic_error = " wbx98302884/n1ct/current/error/";
 int rx_pin = D4;
 int tx_pin = D5; // not really needed, we are receiving only
 
-//modbus response should start with  0x01 0x03 0x04 
-//address 1, function 3, 4 bytes
+// Modbus response should start with  0x01 0x03 0x04, we are reading Current in Amps, see N1-CT manual
+// address 1, function 3, 4 bytes
+// Sample response : 01 03 04 3F A1 68 73 C9 E0 
+//                   -------- =========== -----        
+// 3F A1 68 73 = value     => 1.26 Amp
+// C9 E0       = checksum
 const byte responseheader[4] = {0x01, 0x03, 0x04};
 
 // Create a WiFiManager object

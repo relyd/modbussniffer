@@ -90,27 +90,32 @@ References and tools
 - activating powerboost : https://support.wallbox.com/en/knowledge-base/how-to-activate-power-boost/
 - Modbus decoder helper : https://rapidscada.net/modbus/
 - Hex converter : https://www.scadacore.com/tools/programming-calculators/online-hex-converter/
+- Realterm : easy to send sample hex data via a USB-RS485 for testing.
+- 
 
-
-Notes
+Wallbox Pulsar plus notes
 -----
 - Working on mains equipment is dangerous. Don't electrocute yourself. Know the rules.
 - Wallbox, Pulsar and PowerBoost are registered names of Wallbox.com. This repo is not affiliated with or endorsed by Wallbox.
-- No modbus checksum validation is performed, so do not rely on the values reported for automation
 - The initial handshake between Wallbox and N1-CT has not been investigated, it probably reads meter ID, sets comm parameters etc.
 - The modbus traffic analysed here is based on PowerBoost only.
 - Passively sniffing a modbus should not void any warranty.
+- For PowerBoost operation, it is not required that the mains voltage is connected to the N1-CT, hence it will not report any voltage or power data.
+- The best solution would be that Wallbox.com would push ALL known data to a user settable Mqtt broker. Thank you.
+
+General Notes
+-------------
+- No modbus checksum validation is performed, so do not rely on the values reported for automation
 - In case of trouble check your modbus termination. It depends on the distance between charger and meter.
 - Don't be tempted to add another master to the modbus and query the meter next to the charger. 
-- For PowerBoost operation, it is not required that the mains voltage is connected to the N1-CT, hence it will not report any voltage or power data.
 - For a more permanent solution, a dedicated ESP32 with Tasmota running modbusmonitor would be a much better option. See https://github.com/arendst/Tasmota/discussions/18618 
-- The best solution would be that Wallbox would push ALL known data to a user settable Mqtt broker. Thank you.
-- if you want to contribute, please help testing the Tasmota variant
-- See the ESP script for a simple ESP8266 modbus->mqtt bridge
+- If you want to contribute, please help testing the Tasmota variant
+- See the arduino script for a simple ESP8266 modbus to MQTT bridge
+
 
 Additional information
 ----------------------
-Once steady, the following data can be observed:
+Once steady after bootup of the wallbox, the following data can be observed:
 ```
 ====================
 READ Current at register 500A length 02 

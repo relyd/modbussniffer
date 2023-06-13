@@ -4,6 +4,7 @@
 #include <SoftwareSerial.h>
 
 // CONNECTIONS
+
 // ESP8266 WEMOS LOLIN              HW-519         N1-CT
 // 3V-------------------------------VCC
 // GND------------------------------GND
@@ -11,7 +12,16 @@
 //                                   A+ ------------ D+
 //                                   B- ------------ D-
 //
+
 // note: power the ESP8266 with a USB power supply. Do not connect Vin to the wallbox.
+
+////// **** WARNING ***** 
+////// **** Using the HW-519 resulted in overheating the module after a period of time ***** 
+////// **** The HW-519 is supposed to be interoperable both at 3v3 and 5v              ***** 
+
+
+
+
 
 // Define the MQTT broker credentials
 const char* mqtt_server = "192.168.1.220";

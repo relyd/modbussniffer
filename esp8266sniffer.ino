@@ -27,9 +27,9 @@
 const char* mqtt_server = "192.168.1.220";
 const char* mqtt_username = "your_MQTT_username";
 const char* mqtt_password = "your_MQTT_password";
-const char* mqtt_topic_val = " wbx98302884/n1ct/current/value/";
-const char* mqtt_topic_raw = " wbx98302884/n1ct/current/rawhex/";
-const char* mqtt_topic_error = " wbx98302884/n1ct/current/error/";
+const char* mqtt_topic_val = " wbx98302884/n1ct/current/value";
+const char* mqtt_topic_raw = " wbx98302884/n1ct/current/rawhex";
+const char* mqtt_topic_error = " wbx98302884/n1ct/current/error";
 
 // Define the rs485serial port pins
 int rx_pin = D4;

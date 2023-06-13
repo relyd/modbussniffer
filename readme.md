@@ -116,7 +116,7 @@ Once steady, the following data can be observed:
 READ Current at register 500A length 02 
 01 03 50 0A 00 02   F509 
 
-Response 4 bytes : 3FA1 6873 	
+Response 4 bytes : 3FA1 6873 	=> 1.25 Amps
 01 03 04 3F A1 68 73 C9 E0 
 =========================
 READ voltage (5000) length 02

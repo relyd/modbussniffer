@@ -5,23 +5,21 @@
 
 // CONNECTIONS
 
-// ESP8266 WEMOS LOLIN              HW-519         N1-CT
+// ESP8266 WEMOS LOLIN              HW-519                        N1-CT
 // 3V-------------------------------VCC
 // GND------------------------------GND
 // D4-------------------------------RXD
-//                                   A+ ------------ D+
-//                                   B- ------------ D-
+//                                   A+ -----[1k resistor]------- D+
+//                                   B- ------------------------- D-
 //
 
 // note: power the ESP8266 with a USB power supply. Do not connect Vin to the wallbox.
 
 ////// **** WARNING ***** 
 ////// **** Using the HW-519 resulted in overheating the module after a period of time ***** 
-////// **** The HW-519 is supposed to be interoperable both at 3v3 and 5v              ***** 
-
-
-
-
+////// **** The HW-519 is supposed to be interoperable both at 3v3 and 5v              *****
+////// **** putting a 1K resistor in series with the A input, resolved the issue       *****
+////// **** the sensivity of the HW-519 is high enough to monitor the line             *****
 
 // Define the MQTT broker credentials
 const char* mqtt_server = "192.168.1.220";

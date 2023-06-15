@@ -38,27 +38,38 @@ A charger may prioritise the regular use over charging, for this it needs to kno
 In this case, with a Wallbox Pulsar plus using PowerBoost, you set the maximum in your wallbox using a (tiny) rotary switch
 
 ```
-POSITION    0   1 2  3  4  5  6  7  8   9
-MAX CURRENT *PS 6 10 13 16 20 25 32 *PS *PS
+POSITION    0    1  2   3   4   5   6   7   8    9
+MAX CURRENT *PS  6  10  13  16  20  25  32  *PS  *PS
 ```
+
 E.g. the max contracted power is 5.7KW -----> 5700 WATT / 230 V = 25 Amps ---> setting 6  
 
 Using the PowerBoost function, we assume that whenever home appliances use energy, the charger is throttled down or even switched off. 
 
 In that case it should show "Waiting for energy"
 
-In order to do that, a power meter is connected via modbus, and reported to the charger.
+In order to perform that function, a power meter is connected to the charger via modbus. 
 
-The charger polls the meter continuously, after an initial handshake.
+The charger polls the meter continuously, and the meter responds to the charger.
+
+The meter measures the current in the whole system, so both the current of the charger AND other users.
 
 Problem:
 --------------
 Even when using Powerboost with correct settings, the main fuse may trip for various reasons, like clamp misfit, cable losses etc. 
-The charger "knows" the current that is flowing in the whole system, and the current it charges with, 
+The charger knows the current that is flowing in the whole system, and the current it charges with, 
 but Wallbox so far does not bother providing that detail in any interface, nor the web interface, nor the mobile app.
 
 This makes debugging a pain. Furthermore the precise algorithm how powerboost responds is not clear from the documentation.
+In the wallbox the maximum current is set, but only charging POWER (KW) is visible. 
 
+It would be so much easier to see this:
+
+| Unit | Charger | Other | Total | Max | 
+| ---  | ---     | ---   | ---   | --- | 
+| A    | `9.1`     | `3.2`   | `12.3`  | `25`  |
+| KW   | `2.1`     | `0.7`   |  `2.8` | `5.7` |
+ 
 To read out the total current, you need to sniff the modbus traffic and decode the responses from the meter.
 
 Installation

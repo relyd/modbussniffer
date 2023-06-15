@@ -23,9 +23,11 @@ You will need :
 
 ```
 Connections (see image): 
-powermeter -> modbus -> charger 
-modbus -> Elfin EW11
-Elfin EW11 -> WIFI AP -> PC running PHP tcp listener
+
+Wallbox charger --> 12V power  --> Powermeter N1-CT
+Wallbox charger --> modbus     --> Powermeter N1-CT
+                    modbus     --> Elfin EW11
+                                   Elfin EW11 -> WIFI Access point ----> PC running PHP tcp listener
 ```
 
 Background:
@@ -39,7 +41,7 @@ In this case, with a Wallbox Pulsar plus using PowerBoost, you set the maximum i
 POSITION    0   1 2  3  4  5  6  7  8   9
 MAX CURRENT *PS 6 10 13 16 20 25 32 *PS *PS
 ```
-E.g. the max contracted power is 5.7KW => 20 Amps => setting 5
+E.g. the max contracted power is 5.7KW -----> 5700 WATT / 230 V = 25 Amps ---> setting 6  
 
 Using the PowerBoost function, we assume that whenever home appliances use energy, the charger is throttled down or even switched off. 
 

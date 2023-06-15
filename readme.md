@@ -83,7 +83,7 @@ Connecting the EW11
 - Power on the EW11
 - Power on the charger
 
-From this point on every second the current measured should be available.
+After an initial startup every second the current measured should be available.
 
 References and tools
 -----------

@@ -54,7 +54,7 @@ The charger polls the meter continuously, and the meter responds to the charger.
 
 The meter measures the current in the whole system, so both the current of the charger AND other users.
 
-Problem:
+Problems:
 --------------
 Even when using Powerboost with correct settings, the main fuse may trip for various reasons, like clamp misfit, cable losses etc. 
 The charger knows the current that is flowing in the whole system, and the current it charges with, 
@@ -110,11 +110,12 @@ Wallbox Pulsar plus notes
 -----
 - Working on mains equipment is dangerous. Don't electrocute yourself. Know the rules.
 - Wallbox, Pulsar and PowerBoost are registered names of Wallbox.com. This repo is not affiliated with or endorsed by Wallbox.
-- The initial handshake between Wallbox and N1-CT has not been investigated, it probably reads meter ID, sets comm parameters etc.
+- The initial handshake between Wallbox and N1-CT has not been monitored, it probably reads meter ID, sets comm parameters etc. Take a look at the 90 secs mp4 in this repo.
 - The modbus traffic analysed here is based on PowerBoost only.
+- Please note, firmware updating may just disable your PowerBoost without any notice, and no way you can troubleshoot via app/web.
 - Passively sniffing a modbus should not void any warranty.
-- For PowerBoost operation, it is not required that the mains voltage is connected to the N1-CT, hence it will not report any voltage or power data.
-- The best solution would be that Wallbox.com would push ALL known data to a user settable Mqtt broker. Thank you.
+- For PowerBoost operation, it is not required that the mains voltage is connected to the N1-CT, hence it will not report any voltage or power data, only current.
+- The best solution would be that Wallbox.com would push ALL known data to a user settable MQTT broker. Thank you for asking, but no response.
 
 General Notes
 -------------
@@ -123,7 +124,7 @@ General Notes
 - Don't be tempted to add another master to the modbus and query the meter next to the charger. 
 - For a more permanent solution, a dedicated ESP32 with Tasmota running modbusmonitor would be a much better option. See https://github.com/arendst/Tasmota/discussions/18618 
 - If you want to contribute, please help testing the Tasmota variant
-- See the arduino script for a simple ESP8266 modbus to MQTT bridge
+- See the arduino script for a simple (quick and dirty) ESP8266 modbus to MQTT bridge
 
 
 Additional information
